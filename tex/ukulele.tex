@@ -1,0 +1,39 @@
+\documentclass[a4paper]{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{titletoc}
+\usepackage{xstring}
+
+%\makeatletter
+%\let\latexl@section\l@section
+%\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
+%\makeatother
+
+\newcommand{\song}[3]{
+	\StrSubstitute{#2}{|}{$\mid$}[\chords]
+	\section*{#1}
+	\addcontentsline{toc}{section}{#1 \\ \chords}
+	\chords
+	\\~\\
+	#3
+	~\\~\\~\\~\\
+}
+
+\begin{document}
+	
+\renewcommand{\contentsname}{Ukulele songs by Erik\\~\\}
+\tableofcontents
+
+\clearpage
+
+\section{Foo}
+\section{Bar}
+\section*{lol}
+\addcontentsline{toc}{section}{An Unnumbered Section which has a pretty long\\ name that is to long mama nobbody can display that}
+
+\song{Test song}{a G F F | C C E E :||}{lyrics mama...}
+\song{Test song 2}{a G F F | C C E E :||}{lyrics mama...}
+
+\end{document}
+
+
+
