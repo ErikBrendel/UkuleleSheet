@@ -28,11 +28,17 @@ def split_song(song_content):
 
 
 def latex_lyrics(raw_lyrics):
-    return raw_lyrics.replace("\n", "\\\\\n").replace("[Ref]", "\emph{[Ref]}")
+    return raw_lyrics \
+        .replace("\n", "\\\\\n") \
+        .replace("[Ref]", "\emph{[Ref]}")
 
 
 def latescape(raw):
-    return raw.replace('#', '\#').replace('[', '\emph{\ensuremath{[}').replace(']', '\ensuremath{]}}')
+    return raw \
+        .replace('#', '\#') \
+        .replace("3/4", "\\textthreequarters~") \
+        .replace('[', '\emph{\ensuremath{[}') \
+        .replace(']', '\ensuremath{]}}')
 
 
 def latex_song(song_data):
