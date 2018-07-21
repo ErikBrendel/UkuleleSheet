@@ -20,7 +20,7 @@ def split_song(song_content):
     while len(chord_lines[-1]) > 0:
         chord_lines.append(song_content.pop(0))
     chord_lines.pop()
-    chords = '   '.join(chord_lines).strip()
+    chords = '     '.join(chord_lines).strip().replace('     ', '~~~~~')
 
     lyrics = '\n'.join(song_content).strip()
 
@@ -31,10 +31,14 @@ def latex_lyrics(raw_lyrics):
     return raw_lyrics.replace("\n", "\\\\\n").replace("[Ref]", "\emph{[Ref]}")
 
 
+def latescape(raw):
+    return raw.replace('#', '\#').replace('[', '\emph{\ensuremath{[}').replace(']', '\ensuremath{]}}')
+
+
 def latex_song(song_data):
-    title = song_data[0]
-    chords = song_data[1].replace('/', '|').replace('|', "$\mid$")
-    lyrics = latex_lyrics(song_data[2])
+    title = latescape(song_data[0])
+    chords = latescape(song_data[1]).replace('/', '|').replace('|', "$\mid$")
+    lyrics = latex_lyrics(latescape(song_data[2]))
     if len(lyrics) > 0:
         lyrics = "\n" + lyrics + "\n"
     return "\song{" + title + "}{" + chords + "}{" + lyrics + "}\n\n"
