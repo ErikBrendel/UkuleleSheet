@@ -35,7 +35,9 @@ def latex_song(song_data):
     title = song_data[0]
     chords = song_data[1].replace('/', '|').replace('|', "$\mid$")
     lyrics = latex_lyrics(song_data[2])
-    return "\song{" + title + "}{" + chords + "}{\n" + lyrics + "\n}\n\n"
+    if len(lyrics) > 0:
+        lyrics = "\n" + lyrics + "\n"
+    return "\song{" + title + "}{" + chords + "}{" + lyrics + "}\n\n"
 
 
 ########
