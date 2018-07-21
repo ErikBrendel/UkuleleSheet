@@ -9,13 +9,12 @@
 %\makeatother
 
 \newcommand{\song}[3]{
-	\StrSubstitute{#2}{|}{$\mid$}[\chords]
 	\section*{#1}
-	\addcontentsline{toc}{section}{#1 \\ \chords}
-	\chords
-	\\~\\
+	\addcontentsline{toc}{section}{#1 ~\\ \mdseries{#2}}
+	#2
+	~\\~\\
 	#3
-	~\\~\\~\\~\\
+	~\\~\\~\\
 }
 
 \begin{document}
@@ -25,13 +24,10 @@
 
 \clearpage
 
-\section{Foo}
-\section{Bar}
-\section*{lol}
-\addcontentsline{toc}{section}{An Unnumbered Section which has a pretty long\\ name that is to long mama nobbody can display that}
+\twocolumn
+\setlength{\columnwidth}{0.85\linewidth}
 
-\song{Test song}{a G F F | C C E E :||}{lyrics mama...}
-\song{Test song 2}{a G F F | C C E E :||}{lyrics mama...}
+\include{songs}
 
 \end{document}
 
