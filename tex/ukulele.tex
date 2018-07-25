@@ -10,6 +10,14 @@
 %\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
 %\makeatother
 
+\newcommand*{\NLS}{%
+	\par
+	\nobreak
+	\vspace{-\parskip}%
+	\noindent
+	\ignorespaces
+}
+
 \newcommand{\song}[3]{
 	\section*{#1}
 	\addcontentsline{toc}{section}{#1 ~\\ \mdseries{#2}}
@@ -19,7 +27,7 @@
 	~\\~\\~\\
 }
 \newcommand{\songWithoutText}[2]{
-	\song{#1}{#2}{}
+	\addtocontents{toc}{\vspace{0.4cm} \hspace{-0.55cm}\textbf{#1} ~\NLS #2\par}
 }
 
 \begin{document}

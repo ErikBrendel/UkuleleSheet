@@ -47,6 +47,7 @@ def latex_song(song_data):
     lyrics = latex_lyrics(latescape(song_data[2]))
     if len(lyrics) > 0:
         return "\song{" + title + "}{" + chords + "}{\n" + lyrics + "\n}\n\n"
+    chords = "\\hspace*{0.5cm}" + chords.replace("\\\\", "\\\\ \\hspace*{-0.185cm}")
     return "\songWithoutText{" + title + "}{" + chords + "}\n\n"
 
 
