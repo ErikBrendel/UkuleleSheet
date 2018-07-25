@@ -3,7 +3,7 @@
 \usepackage{titletoc}
 \usepackage{xstring}
 \usepackage{textcomp}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 
 %\makeatletter
 %\let\latexl@section\l@section
@@ -17,6 +17,9 @@
 	~\\~\\
 	#3
 	~\\~\\~\\
+}
+\newcommand{\songWithoutText}[2]{
+	\song{#1}{#2}{}
 }
 
 \begin{document}

@@ -46,8 +46,8 @@ def latex_song(song_data):
     chords = latescape(song_data[1]).replace('/', '|').replace('|', "$\mid$")
     lyrics = latex_lyrics(latescape(song_data[2]))
     if len(lyrics) > 0:
-        lyrics = "\n" + lyrics + "\n"
-    return "\song{" + title + "}{" + chords + "}{" + lyrics + "}\n\n"
+        return "\song{" + title + "}{" + chords + "}{\n" + lyrics + "\n}\n\n"
+    return "\songWithoutText{" + title + "}{" + chords + "}\n\n"
 
 
 ########
