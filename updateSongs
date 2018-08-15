@@ -6,6 +6,9 @@ SONGS_DIR = "songs"
 
 OUT_FILE = "tex/songs.tex"
 
+# have this option in sync with option 1 and 2 in the songWithoutText - latex - command
+PRINT_SONGS_WITHOUT_LYRICS_IN_BODY = True
+
 
 def split_song(song_content):
     song_content.append("")
@@ -28,6 +31,8 @@ def split_song(song_content):
 
 
 def latex_lyrics(raw_lyrics):
+    # .replace("\n\n", "\\\\\n\\NLS\n") \
+    # .replace("\n", "\\NLS\n") \
     return raw_lyrics \
         .replace("\n", "\\\\\n") \
         .replace("[Ref]", "\emph{[Ref]}")
@@ -36,6 +41,13 @@ def latex_lyrics(raw_lyrics):
 def latescape(raw):
     return raw \
         .replace('#', '\#') \
+        .replace('ä', '{\\"a}') \
+        .replace('ö', '{\\"o}') \
+        .replace('ü', '{\\"u}') \
+        .replace('Ä', '{\\"A}') \
+        .replace('Ö', '{\\"O}') \
+        .replace('Ü', '{\\"U}') \
+        .replace('ß', '{\\ss}') \
         .replace("3/4", "\\textthreequarters~") \
         .replace('[', '\emph{\ensuremath{[}') \
         .replace(']', '\ensuremath{]}}')
@@ -47,7 +59,8 @@ def latex_song(song_data):
     lyrics = latex_lyrics(latescape(song_data[2]))
     if len(lyrics) > 0:
         return "\song{" + title + "}{" + chords + "}{\n" + lyrics + "\n}\n\n"
-    chords = "\\hspace*{0.5cm}" + chords.replace("\\\\", "\\\\ \\hspace*{-0.185cm}")
+    if not PRINT_SONGS_WITHOUT_LYRICS_IN_BODY:
+        chords = "\\hspace*{0.5cm}" + chords.replace("\\\\", "\\\\ \\hspace*{-0.185cm}")
     return "\songWithoutText{" + title + "}{" + chords + "}\n\n"
 
 
