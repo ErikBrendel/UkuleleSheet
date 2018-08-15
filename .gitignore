@@ -1,9 +1,8 @@
 .idea
-tex/ukulele.aux
 tex/ukulele.fdb_latexmk
 tex/ukulele.fls
 tex/ukulele.log
 tex/ukulele.synctex.gz
 tex/ukulele.toc
 tex/ukulele.out
-tex/songs.aux
+tex/*.aux
