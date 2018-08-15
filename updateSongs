@@ -48,6 +48,8 @@ def latescape(raw):
         .replace('Ö', '{\\"O}') \
         .replace('Ü', '{\\"U}') \
         .replace('ß', '{\\ss}') \
+        .replace('->', '\\textrightarrow~') \
+        .replace('=>', '\\textrightarrow~') \
         .replace("3/4", "\\textthreequarters~") \
         .replace('[', '\emph{\ensuremath{[}') \
         .replace(']', '\ensuremath{]}}')
