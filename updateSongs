@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import subprocess
 
 SONGS_DIR = "songs"
 
@@ -96,4 +97,21 @@ with open(OUT_FILE, 'w') as out_file:
         song_serialized = latex_song(song)
         out_file.write("%s\n" % song_serialized)
 
-print("Done.")
+print("Done generating tex file.")
+
+#################
+# RUNNING LATEX #
+#################
+
+print("Now running PdfLaTeX")
+os.chdir("tex")
+subprocess.run("pdflatex -synctex=1 -interaction=nonstopmode ukulele.tex".split())
+print("All done!")
+
+##################
+# OPENING RESULT #
+##################
+
+subprocess.run("xdg-open ukulele.pdf".split())
+
+print("Bye!")
