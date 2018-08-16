@@ -40,7 +40,9 @@ def latex_lyrics(raw_lyrics):
 
 def latescape(raw):
     return raw \
-        .replace('#', '\#') \
+        .replace('#', '\\#') \
+        .replace('{', '\\{') \
+        .replace('}', '\\}') \
         .replace('ä', '{\\"a}') \
         .replace('ö', '{\\"o}') \
         .replace('ü', '{\\"u}') \

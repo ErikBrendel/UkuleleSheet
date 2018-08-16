@@ -1,5 +1,5 @@
 \documentclass[a4paper,twoside]{article}
-\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage[a4paper, total={6in, 10in}, bindingoffset=8mm]{geometry}
 \usepackage{titletoc}
 \usepackage{xstring}
 \usepackage{textcomp}
@@ -24,10 +24,11 @@
 
 
 \newcommand{\songheading}[2]{
-	\vbox{%
+	%\vbox{%
 	\section*{#1}
 	\addcontentsline{toc}{section}{#1 ~\\ \mdseries{#2}}
-	#2}
+	#2%}
+	~\\
 }
 
 \newcommand{\song}[3]{
