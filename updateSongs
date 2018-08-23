@@ -36,7 +36,7 @@ def latex_lyrics(raw_lyrics):
     # .replace("\n", "\\NLS\n") \
     return raw_lyrics \
         .replace("\n", "\\\\\n") \
-        .replace("[Ref]", "\emph{[Ref]}")
+        .replace('|', "$\mid$")
 
 
 def latescape(raw):
@@ -54,8 +54,8 @@ def latescape(raw):
         .replace('->', '\\textrightarrow~') \
         .replace('=>', '\\textrightarrow~') \
         .replace("3/4", "\\textthreequarters~") \
-        .replace('[', '\emph{\ensuremath{[}') \
-        .replace(']', '\ensuremath{]}}')
+        .replace('[', '\emph{[') \
+        .replace(']', ']}')
 
 
 def latex_song(song_data):
@@ -105,6 +105,10 @@ print("Done generating tex file.")
 
 print("Now running PdfLaTeX")
 os.chdir("tex")
+subprocess.run("pdflatex -synctex=1 -interaction=nonstopmode ukulele.tex".split())
+print("RUN 2")
+subprocess.run("pdflatex -synctex=1 -interaction=nonstopmode ukulele.tex".split())
+print("RUN 3")
 subprocess.run("pdflatex -synctex=1 -interaction=nonstopmode ukulele.tex".split())
 print("All done!")
 
