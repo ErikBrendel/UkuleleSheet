@@ -16,76 +16,77 @@
 
 % non-page-breaking line break
 \newcommand*{\NLS}{%
-	\par
-	\nobreak
-	\vspace{-\parskip}%
-	\noindent
-	\ignorespaces
+\par
+\nobreak
+\vspace{-\parskip}%
+\noindent
+\ignorespaces
 }
 
 
-\newcommand{\songheading}[2]{
-	%\vbox{%
-	\section*{#1}
-	\addcontentsline{toc}{section}{#1 ~\\ \mdseries{#2}}
-	#2%}
-	~\\
+\definecolor{artistText}{gray}{0.3}
+\newcommand{\songheading}[3]{
+%\vbox{%
+\section*{#1 ~\NLS {\color{artistText}\textit{\small{#2}}}}
+\addcontentsline{toc}{section}{#1 ~ {\color{artistText}\textit{#2}} ~\\ \mdseries{#3}}
+#3%}
+~\\
 }
 
-\newcommand{\song}[3]{
-	\songheading{#1}{#2}
-	~\NLS
-	#3
-	%\titlespacing*{\section}{0pt}{1.5cm}{0.4cm}
-	\vspace{1cm}
-	%~\\~\\~\\
+\newcommand{\song}[4]{
+\songheading{#1}{#2}{#3}
+~\NLS
+#4
+%\titlespacing*{\section}{0pt}{1.5cm}{0.4cm}
+\vspace{1cm}
+%~\\~\\~\\
 }
 
 \definecolor{codebgcolor}{gray}{0.3}
-\newcommand{\songWithoutText}[2]{
-	% option 1: Just the entry in the TOC, but not between the texts anymore
-	%\addtocontents{toc}{\vspace{0.4cm} \hspace{-0.55cm}\textbf{#1} ~\NLS #2\hfill {\color{codebgcolor}\texttimes}\par}
+\newcommand{\songWithoutText}[3]{
+% option 1: Just the entry in the TOC, but not between the texts anymore
+%\addtocontents{toc}{\vspace{0.4cm} \hspace{-0.55cm}\textbf{#1} ~\NLS #2\hfill {\color{codebgcolor}\texttimes}\par}
 
-	% option 2: entry in TOC and between the lyrics
-	\songheading{#1}{#2}
-	\vspace{1cm}
-	%\titlespacing*{\section}{0pt}{1cm}{0.4cm}
+% option 2: entry in TOC and between the lyrics
+\songheading{#1}{#2}{#3}
+\vspace{1cm}
+%\titlespacing*{\section}{0pt}{1cm}{0.4cm}
 }
 
 
 \usepackage{etoolbox}
 \usepackage{tikz}
 \newcommand\drawukulelechord[2][]{%
-	\edef\chord{#2}%
-	\begin{tikzpicture}[x=1.45ex,y=2ex,line cap=round,line width=.4pt,
-	baseline=(current bounding box.center),#1]
-	\draw[line width=.6pt] (1,0) -- (4,0);
-	\foreach \d in {1,...,4}{\draw (1,-\d) -- (4,-\d);}
-	\foreach \d[count=\p] in \chord {
-		\draw (\p,0) -- (\p,-4.8);
-		\ifdefstring{\d}{-1}{
-			\draw (\p,.25) +(-.125,-.125) -- +(.125,.125)
-			+(-.125,.125) -- +(.125,-.125);
-		}{
-		\ifdefstring{\d}{0}{
-			%\draw (\p,.25) circle(.125); % opened string
-		}{
-		\fill (\p,.5-1*\d) circle(.25);
-	}
-}
-}
-\path[use as bounding box] (0.5,.5) rectangle (4.5,-5);
+\edef\chord{#2}%
+\begin{tikzpicture}[x=1.45ex,y=2ex,line cap=round,line width=.4pt,
+baseline=(current bounding box.center),#1]
+    \draw[line width=.6pt] (1,0) -- (4,0);
+    \foreach \d in {1,...,4}{\draw (1,-\d) -- (4,-\d);}
+    \foreach \d[count=\p] in \chord {
+    \draw (\p,0) -- (\p,-4.8);
+    \ifdefstring{\d}{-1}{
+    \draw (\p,.25) +(-.125,-.125) -- +(.125,.125)
+    +(-.125,.125) -- +(.125,-.125);
+    }{
+    \ifdefstring{\d}{0}{
+    %\draw (\p,.25) circle(.125); % opened string
+    }{
+    \fill (\p,.5-1*\d) circle(.25);
+    }
+    }
+    }
+    \path[use as bounding box] (0.5,.5) rectangle (4.5,-5);
 \end{tikzpicture}%
 }
 \makeatletter
 \newcommand\defineukulelechord[2]{%
-	\csdef{@ukulelechord@#1}{\drawukulelechord{#2}}%
+\csdef{@ukulelechord@#1}{\drawukulelechord{#2}}%
 }
 \newcommand\ukulelechord[1]{%
-	\ifcsdef{@ukulelechord@#1}{%
-		\csuse{@ukulelechord@#1}%
-	}{%
-	\GenericError{}{Undefined ukulele chord '#1'}{}{}%
+\ifcsdef{@ukulelechord@#1}{%
+\csuse{@ukulelechord@#1}%
+}{%
+\GenericError{}{Undefined ukulele chord '#1'}{}{}%
 }%
 }
 \makeatother
@@ -93,21 +94,21 @@
 
 \begin{document}
 
-\renewcommand{\contentsname}{\centerline{Ukulele songs by Erik}}
-\tableofcontents
+    \renewcommand{\contentsname}{\centerline{Ukulele songs by Erik}}
+    \tableofcontents
 
-%\cleardoublepage
-\clearpage
+    %\cleardoublepage
+    \clearpage
 
-\twocolumn
-\setlength{\columnwidth}{0.85\linewidth}
+    \twocolumn
+    \setlength{\columnwidth}{0.85\linewidth}
 
-\titlespacing*{\section}{0pt}{0cm}{0.4cm}
-\include{songs}
+    \titlespacing*{\section}{0pt}{0cm}{0.4cm}
+    \include{songs}
 
-\onecolumn
-\cleardoublepage
-\include{chords}
+    \onecolumn
+    \cleardoublepage
+    \include{chords}
 
 \end{document}
 
