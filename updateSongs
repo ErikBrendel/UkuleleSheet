@@ -12,6 +12,10 @@ OUT_FILE = "tex/songs.tex"
 PRINT_SONGS_WITHOUT_LYRICS_IN_BODY = True
 
 
+def make_blocks_unbreakable(latex_stuff):
+    return "\\noindent\\vbox{~\\\\" + latex_stuff.replace("\\\\\n\\\\", "}\\\\\n\\\\\\noindent\\vbox{~\\\\") + "}"
+
+
 def format_chords(chords_string):
     # subscript number accord
     chords_string = re.sub(r"\b([a-z]+)(\d+)\b", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
@@ -77,7 +81,7 @@ def latex_song(song_data):
     title = latescape(song_data[0])
     artist = latescape(song_data[1])
     chords = format_chords(latescape(song_data[2]).replace('/', '|').replace('|', "$\mid$"))
-    lyrics = latex_lyrics(latescape(song_data[3]))
+    lyrics = make_blocks_unbreakable(latex_lyrics(latescape(song_data[3])))
     if len(lyrics) > 0:
         return "\song{" + title + "}{" + artist + "}{" + chords + "}{\n" + lyrics + "\n}\n\n"
     if not PRINT_SONGS_WITHOUT_LYRICS_IN_BODY:

@@ -25,10 +25,10 @@
 
 % no page break env
 \newenvironment{npb}
-  {\par\nobreak\vfil\penalty0\vfilneg
-   \vtop\bgroup}
-  {\par\xdef\tpd{\the\prevdepth}\egroup
-   \prevdepth=\tpd}
+{\par\nobreak\vfil\penalty0\vfilneg
+\vtop\bgroup}
+{\par\xdef\tpd{\the\prevdepth}\egroup
+\prevdepth=\tpd}
 
 
 \definecolor{artistText}{gray}{0.3}
@@ -45,7 +45,6 @@
 %\begin{npb}
 \songheading{#1}{#2}{#3}
 %\end{npb}
-~\NLS
 #4
 %\titlespacing*{\section}{0pt}{1.5cm}{0.4cm}
 \vspace{1cm}
