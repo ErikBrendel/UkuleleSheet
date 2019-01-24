@@ -23,18 +23,28 @@
 \ignorespaces
 }
 
+% no page break env
+\newenvironment{npb}
+  {\par\nobreak\vfil\penalty0\vfilneg
+   \vtop\bgroup}
+  {\par\xdef\tpd{\the\prevdepth}\egroup
+   \prevdepth=\tpd}
+
 
 \definecolor{artistText}{gray}{0.3}
 \newcommand{\songheading}[3]{
-%\vbox{%
+\vbox{
 \section*{#1 ~\NLS {\color{artistText}\textit{\small{#2}}}}
 \addcontentsline{toc}{section}{#1 ~ {\color{artistText}\textit{#2}} ~\\ \mdseries{#3}}
-#3%}
+#3
+}
 ~\\
 }
 
 \newcommand{\song}[4]{
+%\begin{npb}
 \songheading{#1}{#2}{#3}
+%\end{npb}
 ~\NLS
 #4
 %\titlespacing*{\section}{0pt}{1.5cm}{0.4cm}
@@ -86,7 +96,7 @@ baseline=(current bounding box.center),#1]
 \ifcsdef{@ukulelechord@#1}{%
 \csuse{@ukulelechord@#1}%
 }{%
-\GenericError{}{Undefined ukulele chord '#1'}{}{}%
+%\GenericError{}{Undefined ukulele chord '#1'}{}{}%
 }%
 }
 \makeatother
