@@ -19,6 +19,7 @@ def format_chords(chords_string):
     chords_string = re.sub(r"\b(\w+)\((\w+)\b\)", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
     chords_string = chords_string.replace("dim", "$_{dim}$")
     chords_string = chords_string.replace("\#", "$^{\#}$")
+    chords_string = chords_string.replace(r"M$_{", r"$_{M")
     chords_string = chords_string.replace("$$", "")
     return chords_string
 
