@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+import re
 
 SONGS_DIR = "songs"
 
@@ -9,6 +10,17 @@ OUT_FILE = "tex/songs.tex"
 
 # have this option in sync with option 1 and 2 in the songWithoutText - latex - command
 PRINT_SONGS_WITHOUT_LYRICS_IN_BODY = True
+
+
+def format_chords(chords_string):
+    # subscript number accord
+    chords_string = re.sub(r"\b([a-z]+)(\d+)\b", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
+    # subscript bass accord
+    chords_string = re.sub(r"\b(\w+)\((\w+)\b\)", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
+    chords_string = chords_string.replace("dim", "$_{dim}$")
+    chords_string = chords_string.replace("\#", "$^{\#}$")
+    chords_string = chords_string.replace("$$", "")
+    return chords_string
 
 
 def split_song(song_content):
@@ -63,7 +75,7 @@ def latescape(raw):
 def latex_song(song_data):
     title = latescape(song_data[0])
     artist = latescape(song_data[1])
-    chords = latescape(song_data[2]).replace('/', '|').replace('|', "$\mid$")
+    chords = format_chords(latescape(song_data[2]).replace('/', '|').replace('|', "$\mid$"))
     lyrics = latex_lyrics(latescape(song_data[3]))
     if len(lyrics) > 0:
         return "\song{" + title + "}{" + artist + "}{" + chords + "}{\n" + lyrics + "\n}\n\n"
