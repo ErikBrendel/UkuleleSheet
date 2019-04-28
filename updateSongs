@@ -18,7 +18,7 @@ def make_blocks_unbreakable(latex_stuff):
 
 def format_chords(chords_string):
     # subscript number accord
-    chords_string = re.sub(r"\b([a-z]+)(\d+)\b", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
+    chords_string = re.sub(r"\b([a-z]+)(M?\d+)\b", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
     # subscript bass accord
     chords_string = re.sub(r"\b(\w+)\((\w+)\b\)", r"\1$_{\2}$", chords_string, flags=re.IGNORECASE)
     chords_string = chords_string.replace("dim", "$_{dim}$")
